@@ -1,18 +1,3 @@
-# tgfilestream - A Telegram bot that can stream Telegram files to users over HTTP.
-# Copyright (C) 2019 Tulir Asokan
-#
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU Affero General Public License for more details.
-#
-# You should have received a copy of the GNU Affero General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
 from typing import Dict, cast
 from collections import defaultdict
 import logging
@@ -29,17 +14,13 @@ routes = web.RouteTableDef()
 ongoing_requests: Dict[str, int] = defaultdict(lambda: 0)
 
 
-@routes.head(r"/file/{chat_id}/{message_id}")
+@routes.head(r"/stream/{id:\d+}")
 async def handle_head_request(req: web.Request) -> web.Response:
-    message_id = request.match_info['message_id']
-    message_id = int(re.search(r'(\d+)(?:\/\S+)?', message_id).group(1))
     return await handle_request(req, head=True)
 
 
-@routes.get(r"/file/:{chat_id}/{message_id}")
+@routes.get(r"/stream/{id:\d+}")
 async def handle_get_request(req: web.Request) -> web.Response:
-    message_id = request.match_info['message_id']
-    message_id = int(re.search(r'(\d+)(?:\/\S+)?', message_id).group(1))
     return await handle_request(req, head=False)
 
 
