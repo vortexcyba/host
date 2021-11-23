@@ -29,13 +29,17 @@ routes = web.RouteTableDef()
 ongoing_requests: Dict[str, int] = defaultdict(lambda: 0)
 
 
-@routes.head(r"/file/:{chat_id:\d+}/:{id:\d+}")
+@routes.head(r"/file/{chat_id}/{message_id}")
 async def handle_head_request(req: web.Request) -> web.Response:
+    message_id = request.match_info['message_id']
+    message_id = int(re.search(r'(\d+)(?:\/\S+)?', message_id).group(1))
     return await handle_request(req, head=True)
 
 
-@routes.get(r"/file/:{chat_id:\d+}/:{id:\d+}")
+@routes.get(r"/file/:{chat_id}/{message_id}")
 async def handle_get_request(req: web.Request) -> web.Response:
+    message_id = request.match_info['message_id']
+    message_id = int(re.search(r'(\d+)(?:\/\S+)?', message_id).group(1))
     return await handle_request(req, head=False)
 
 
