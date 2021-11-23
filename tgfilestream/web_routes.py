@@ -31,11 +31,15 @@ ongoing_requests: Dict[str, int] = defaultdict(lambda: 0)
 
 @routes.head(r"/file/:{chat_id:\d+}/:{message_id:\S+}")
 async def handle_head_request(req: web.Request) -> web.Response:
+    file_id = media_msg.message_id
+    chat_id = media_msg.chat.id
     return await handle_request(req, head=True)
 
 
 @routes.get(r"/file/:{chat_id:\d+}/:{message_id:\S+}")
 async def handle_get_request(req: web.Request) -> web.Response:
+    file_id = media_msg.message_id
+    chat_id = media_msg.chat.id 
     return await handle_request(req, head=False)
 
 
