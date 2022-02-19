@@ -19,7 +19,7 @@ import os
 from yarl import URL
 
 try:
-    port = int(os.environ.get("PORT", "8080"))
+    port = 8080
 except ValueError:
     port = -1
 if not 1 <= port <= 65535:
@@ -27,19 +27,19 @@ if not 1 <= port <= 65535:
     sys.exit(1)
 
 try:
-    api_id = int(os.environ["TG_API_ID"])
-    api_hash = os.environ["TG_API_HASH"]
+    api_id = 5019679
+    api_hash = a25681486dc94d31353e99384da28521
 except (KeyError, ValueError):
     print("Please set the TG_API_ID and TG_API_HASH environment variables correctly")
     print("You can get your own API keys at https://my.telegram.org/apps")
     sys.exit(1)
 
 trust_headers = bool(os.environ.get("TRUST_FORWARD_HEADERS"))
-host = os.environ.get("HOST", "localhost")
-public_url = URL(os.environ.get("PUBLIC_URL", f"http://{host}:{port}"))
+host = "localhost"
+public_url = "http://localhost:8080"
 
-session_name = os.environ.get("TG_SESSION_NAME", "tgfilestream")
-bot_token = os.environ.get("BOT_TOKEN", "tgfilestream")
+session_name = "tgfilestream"
+bot_token = 1938116581:AAG9-EA5p77NG_ABKboXoEUsbVEHV5N3OaY
 
 log_config = os.environ.get("LOG_CONFIG")
 debug = bool(os.environ.get("DEBUG"))
