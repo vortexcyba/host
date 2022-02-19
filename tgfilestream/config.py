@@ -39,7 +39,7 @@ host = "localhost"
 public_url = "http://localhost:8080"
 
 session_name = "tgfilestream"
-bot_token = 1938116581:AAG9-EA5p77NG_ABKboXoEUsbVEHV5N3OaY
+bot_token = "1938116581:AAG9-EA5p77NG_ABKboXoEUsbVEHV5N3OaY"
 
 log_config = os.environ.get("LOG_CONFIG")
 debug = bool(os.environ.get("DEBUG"))
